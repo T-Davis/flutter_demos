@@ -32,6 +32,12 @@ class MyApp extends StatelessWidget {
                       "Flutter Developer",
                       style: TextStyle(fontSize: 25, color: Colors.white),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
+                      child: Divider(
+                        color: Colors.white,
+                      ),
+                    ),
                     MaterialButton(
                       color: Colors.white,
                       height: 45,
