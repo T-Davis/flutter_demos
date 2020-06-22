@@ -47,8 +47,10 @@ class MyApp extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       child: MaterialButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
                         color: Colors.white,
                         height: 45,
                         child: Row(
@@ -63,18 +65,20 @@ class MyApp extends StatelessWidget {
                                 "+01 970 275 6679",
                                 style: TextStyle(
                                     fontSize: 16,
-                                    color: Colors.teal,
+                                    color: Colors.teal.shade900,
                                     backgroundColor: Colors.white),
                               ),
-                            )
+                            ),
                           ],
                         ),
                         onPressed: () => {},
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       child: MaterialButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
                         color: Colors.white,
                         height: 45,
                         child: Row(
@@ -89,7 +93,7 @@ class MyApp extends StatelessWidget {
                                 "tzendou@gmail.com",
                                 style: TextStyle(
                                     fontSize: 16,
-                                    color: Colors.teal,
+                                    color: Colors.teal.shade900,
                                     backgroundColor: Colors.white),
                               ),
                             )
