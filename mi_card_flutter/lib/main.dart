@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
                       style: GoogleFonts.lexendExa(
                         textStyle: TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: Colors.teal.shade100,
                         ),
                       ),
                     ),
