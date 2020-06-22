@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,11 +27,18 @@ class MyApp extends StatelessWidget {
                     ),
                     Text(
                       "Trevor Davis",
-                      style: TextStyle(fontSize: 25, color: Colors.white),
+                      style: GoogleFonts.pacifico(
+                          textStyle:
+                              TextStyle(color: Colors.white, fontSize: 50)),
                     ),
                     Text(
-                      "Flutter Developer",
-                      style: TextStyle(fontSize: 25, color: Colors.white),
+                      "FLUTTER DEVELOPER",
+                      style: GoogleFonts.lexendExa(
+                        textStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
