@@ -46,51 +46,57 @@ class MyApp extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    MaterialButton(
-                      color: Colors.white,
-                      height: 45,
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.call,
-                            color: Colors.teal,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            child: Text(
-                              "+01 970 275 6679",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.teal,
-                                  backgroundColor: Colors.white),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                      child: MaterialButton(
+                        color: Colors.white,
+                        height: 45,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.call,
+                              color: Colors.teal,
                             ),
-                          )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                              child: Text(
+                                "+01 970 275 6679",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.teal,
+                                    backgroundColor: Colors.white),
+                              ),
+                            )
+                          ],
+                        ),
+                        onPressed: () => {},
                       ),
-                      onPressed: () => {},
                     ),
-                    MaterialButton(
-                      color: Colors.white,
-                      height: 45,
-                      child: Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.email,
-                            color: Colors.teal,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            child: Text(
-                              "tzendou@gmail.com",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.teal,
-                                  backgroundColor: Colors.white),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                      child: MaterialButton(
+                        color: Colors.white,
+                        height: 45,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.email,
+                              color: Colors.teal,
                             ),
-                          )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                              child: Text(
+                                "tzendou@gmail.com",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.teal,
+                                    backgroundColor: Colors.white),
+                              ),
+                            )
+                          ],
+                        ),
+                        onPressed: () => {},
                       ),
-                      onPressed: () => {},
                     ),
                   ],
                 ),
