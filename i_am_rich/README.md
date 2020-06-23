@@ -7,6 +7,7 @@ crazy amount of money for an app that simply displays a gem stone. 💎
 
 ![app screenshot](screenshots/image1.png)
 
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
