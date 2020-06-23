@@ -21,7 +21,7 @@ class AskMeAnything extends StatefulWidget {
 }
 
 class _AskMeAnythingState extends State<AskMeAnything> {
-  int ballNumber;
+  int ballNumber = 1;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +33,11 @@ class _AskMeAnythingState extends State<AskMeAnything> {
           splashColor: Colors.transparent,
           onPressed: () {
             setState(() {
-              ballNumber = Random().nextInt(5) + 1;
+              int num = Random().nextInt(5) + 1;
+              while (num == ballNumber) {
+                num = Random().nextInt(5) + 1;
+              }
+              ballNumber = num;
             });
           },
         ),
