@@ -25,11 +25,13 @@ class MyApp extends StatelessWidget {
                       radius: 75,
                       backgroundImage: AssetImage('images/avatar.jpg'),
                     ),
-                    Text(
-                      "Trevor Davis",
-                      style: GoogleFonts.pacifico(
-                          textStyle:
-                              TextStyle(color: Colors.white, fontSize: 50)),
+                    FittedBox(
+                      child: Text(
+                        "Trevor Davis",
+                        style: GoogleFonts.pacifico(
+                            textStyle:
+                                TextStyle(color: Colors.white, fontSize: 50)),
+                      ),
                     ),
                     Text(
                       "FLUTTER DEVELOPER",
