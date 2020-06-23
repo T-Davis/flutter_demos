@@ -31,7 +31,7 @@ class XylophoneApp extends StatelessWidget {
     );
   }
 
-  Expanded buildKey({MaterialColor color, int noteNum}) {
+  Expanded buildKey({Color color, int noteNum}) {
     return Expanded(
       child: FlatButton(
         color: color,
