@@ -1,4 +1,4 @@
-# Ask Me Anything!
+# Dicee!
 Another demo flutter app as I explore the framework and sdk.
 
 Do you feel lucky? Roll and find out! 🎲🎲
