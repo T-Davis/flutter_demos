@@ -8,7 +8,7 @@ class XylophoneApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.grey.shade50,
         body: SafeArea(
           child: Container(
             child: Center(
@@ -33,13 +33,18 @@ class XylophoneApp extends StatelessWidget {
 
   Expanded buildKey({Color color, int noteNum}) {
     return Expanded(
-      child: FlatButton(
-        color: color,
-        onPressed: () {
-          final player = AudioCache();
-          player.play('note$noteNum.wav');
-        },
-        child: null,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8.0, 4, 8, 4),
+        child: RaisedButton(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          color: color,
+          onPressed: () {
+            final player = AudioCache();
+            player.play('note$noteNum.wav');
+          },
+          child: null,
+        ),
       ),
     );
   }
