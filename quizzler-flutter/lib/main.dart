@@ -31,6 +31,16 @@ class _QuizPageState extends State<QuizPage> {
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.'
   ];
+  int questionNumber = 0;
+
+  Text questionText = Text(
+    '',
+    textAlign: TextAlign.center,
+    style: TextStyle(
+      fontSize: 25.0,
+      color: Colors.white,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +53,7 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
-              child: Text(
-                'This is where the question text will go.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
-                ),
-              ),
+              child: questionText,
             ),
           ),
         ),
@@ -72,6 +75,14 @@ class _QuizPageState extends State<QuizPage> {
                   scoreKeeper.add(
                     Icon(Icons.check, color: Colors.green),
                   );
+                  if (questionNumber < questions.length) {
+                    questionNumber++;
+                    questionText = Text(questions[questionNumber]);
+                  }
+                  if (questionNumber >= questions.length - 1) {
+                  } else {
+                    questionText = Text('End');
+                  }
                 });
               },
             ),
@@ -94,6 +105,12 @@ class _QuizPageState extends State<QuizPage> {
                   scoreKeeper.add(
                     Icon(Icons.close, color: Colors.red),
                   );
+                  if (questionNumber < questions.length - 1) {
+                    questionNumber++;
+                    questionText = Text(questions[questionNumber]);
+                  } else {
+                    questionText = Text('End');
+                  }
                 });
               },
             ),
