@@ -31,19 +31,21 @@ class _QuizPageState extends State<QuizPage> {
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.'
   ];
+  List<bool> answers = [false, true, true];
   int questionNumber = 0;
-
-  Text questionText = Text(
-    '',
-    textAlign: TextAlign.center,
-    style: TextStyle(
-      fontSize: 25.0,
-      color: Colors.white,
-    ),
-  );
+  bool isGameOver = false;
+  String questionText;
+  int correctNum = 0;
+  int incorrectNum = 0;
 
   @override
   Widget build(BuildContext context) {
+    if (questionNumber >= questions.length) {
+      isGameOver = true;
+      questionText = 'Finished\nYou got $correctNum correct!';
+    } else {
+      questionText = questions[questionNumber];
+    }
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -53,7 +55,14 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
-              child: questionText,
+              child: Text(
+                questionText,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ),
@@ -72,16 +81,19 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(Icons.check, color: Colors.green),
-                  );
-                  if (questionNumber < questions.length) {
+                  if (!isGameOver) {
+                    if (answers[questionNumber]) {
+                      scoreKeeper.add(
+                        Icon(Icons.check, color: Colors.green),
+                      );
+                      correctNum++;
+                    } else {
+                      scoreKeeper.add(
+                        Icon(Icons.close, color: Colors.red),
+                      );
+                      incorrectNum++;
+                    }
                     questionNumber++;
-                    questionText = Text(questions[questionNumber]);
-                  }
-                  if (questionNumber >= questions.length - 1) {
-                  } else {
-                    questionText = Text('End');
                   }
                 });
               },
@@ -102,14 +114,19 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(Icons.close, color: Colors.red),
-                  );
-                  if (questionNumber < questions.length - 1) {
+                  if (!isGameOver) {
+                    if (!answers[questionNumber]) {
+                      scoreKeeper.add(
+                        Icon(Icons.check, color: Colors.green),
+                      );
+                      correctNum++;
+                    } else {
+                      scoreKeeper.add(
+                        Icon(Icons.close, color: Colors.red),
+                      );
+                      incorrectNum++;
+                    }
                     questionNumber++;
-                    questionText = Text(questions[questionNumber]);
-                  } else {
-                    questionText = Text('End');
                   }
                 });
               },
