@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'question.dart';
+import 'questions.dart';
 
 void main() => runApp(Quizzler());
 
@@ -28,27 +28,20 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<Question> questions = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: true)
-  ];
   int questionNumber = 0;
   bool isGameOver = false;
   String questionText;
-  int correctNum = 0;
-  int incorrectNum = 0;
+  int correctAnswers = 0;
+  int incorrectAnswers = 0;
 
   @override
   Widget build(BuildContext context) {
-    if (questionNumber >= questions.length) {
+    if (questionNumber >= Questions.getNumberOfQuestions()) {
       isGameOver = true;
       questionText =
-          'Finished\nYou got $correctNum of $questionNumber correct!';
+          'Finished\nYou got $correctAnswers of $questionNumber correct!';
     } else {
-      questionText = questions[questionNumber].q;
+      questionText = Questions.getQuestion(questionNumber).question;
     }
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,17 +78,18 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
+                  Questions.getQuestion(questionNumber).answer = true;
                   if (!isGameOver) {
-                    if (questions[questionNumber].a) {
+                    if (Questions.getQuestion(questionNumber).answer) {
                       scoreKeeper.add(
                         Icon(Icons.check, color: Colors.green),
                       );
-                      correctNum++;
+                      correctAnswers++;
                     } else {
                       scoreKeeper.add(
                         Icon(Icons.close, color: Colors.red),
                       );
-                      incorrectNum++;
+                      incorrectAnswers++;
                     }
                     questionNumber++;
                   }
@@ -119,16 +113,16 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   if (!isGameOver) {
-                    if (!questions[questionNumber].a) {
+                    if (!Questions.getQuestion(questionNumber).answer) {
                       scoreKeeper.add(
                         Icon(Icons.check, color: Colors.green),
                       );
-                      correctNum++;
+                      correctAnswers++;
                     } else {
                       scoreKeeper.add(
                         Icon(Icons.close, color: Colors.red),
                       );
-                      incorrectNum++;
+                      incorrectAnswers++;
                     }
                     questionNumber++;
                   }
