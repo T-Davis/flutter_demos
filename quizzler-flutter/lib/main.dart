@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'question.dart';
+
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -26,12 +28,13 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
+  List<Question> questions = [
+    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
+    Question(
+        q: 'Approximately one quarter of human bones are in the feet.',
+        a: true),
+    Question(q: 'A slug\'s blood is green.', a: true)
   ];
-  List<bool> answers = [false, true, true];
   int questionNumber = 0;
   bool isGameOver = false;
   String questionText;
@@ -42,9 +45,10 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     if (questionNumber >= questions.length) {
       isGameOver = true;
-      questionText = 'Finished\nYou got $correctNum correct!';
+      questionText =
+          'Finished\nYou got $correctNum of $questionNumber correct!';
     } else {
-      questionText = questions[questionNumber];
+      questionText = questions[questionNumber].q;
     }
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,7 +86,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   if (!isGameOver) {
-                    if (answers[questionNumber]) {
+                    if (questions[questionNumber].a) {
                       scoreKeeper.add(
                         Icon(Icons.check, color: Colors.green),
                       );
@@ -115,7 +119,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   if (!isGameOver) {
-                    if (!answers[questionNumber]) {
+                    if (!questions[questionNumber].a) {
                       scoreKeeper.add(
                         Icon(Icons.check, color: Colors.green),
                       );
