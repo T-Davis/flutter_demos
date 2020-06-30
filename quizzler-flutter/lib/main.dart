@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'questions.dart';
 
@@ -29,10 +30,10 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
   int questionNumber = 0;
-  bool isGameOver = false;
   String questionText;
   int correctAnswers = 0;
   int incorrectAnswers = 0;
+
   void checkAnswer(bool userAnswer) {
     if (Questions.getQuestion(questionNumber).answer == userAnswer) {
       scoreKeeper.add(
@@ -49,13 +50,6 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (questionNumber >= Questions.getNumberOfQuestions()) {
-      isGameOver = true;
-      questionText =
-          'Finished\nYou got $correctAnswers of $questionNumber correct!';
-    } else {
-      questionText = Questions.getQuestion(questionNumber).question;
-    }
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -66,7 +60,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questionText,
+                Questions.getQuestion(questionNumber).question,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -91,8 +85,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (!isGameOver) {
-                    checkAnswer(true);
+                  checkAnswer(true);
+                  if (questionNumber >= Questions.getNumberOfQuestions() - 1) {
+                    _gameFinishedAlert(context);
+                    questionNumber = 0;
+                    scoreKeeper = [];
+                    correctAnswers = 0;
+                    incorrectAnswers = 0;
+                  } else {
                     questionNumber++;
                   }
                 });
@@ -114,8 +114,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  if (!isGameOver) {
-                    checkAnswer(false);
+                  checkAnswer(false);
+                  if (questionNumber >= Questions.getNumberOfQuestions() - 1) {
+                    _gameFinishedAlert(context);
+                    questionNumber = 0;
+                    scoreKeeper = [];
+                    correctAnswers = 0;
+                    incorrectAnswers = 0;
+                  } else {
                     questionNumber++;
                   }
                 });
@@ -128,5 +134,25 @@ class _QuizPageState extends State<QuizPage> {
         )
       ],
     );
+  }
+
+  _gameFinishedAlert(context) {
+    questionNumber++;
+    Alert(
+      context: context,
+      type: AlertType.error,
+      title: 'Quiz Finished',
+      desc: 'You got $correctAnswers of $questionNumber correct!',
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Play Again",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          width: 120,
+        )
+      ],
+    ).show();
   }
 }
