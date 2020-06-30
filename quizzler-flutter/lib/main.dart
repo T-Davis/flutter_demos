@@ -33,6 +33,19 @@ class _QuizPageState extends State<QuizPage> {
   String questionText;
   int correctAnswers = 0;
   int incorrectAnswers = 0;
+  void checkAnswer(bool userAnswer) {
+    if (Questions.getQuestion(questionNumber).answer == userAnswer) {
+      scoreKeeper.add(
+        Icon(Icons.check, color: Colors.green),
+      );
+      correctAnswers++;
+    } else {
+      scoreKeeper.add(
+        Icon(Icons.close, color: Colors.red),
+      );
+      incorrectAnswers++;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,19 +91,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  Questions.getQuestion(questionNumber).answer = true;
                   if (!isGameOver) {
-                    if (Questions.getQuestion(questionNumber).answer) {
-                      scoreKeeper.add(
-                        Icon(Icons.check, color: Colors.green),
-                      );
-                      correctAnswers++;
-                    } else {
-                      scoreKeeper.add(
-                        Icon(Icons.close, color: Colors.red),
-                      );
-                      incorrectAnswers++;
-                    }
+                    checkAnswer(true);
                     questionNumber++;
                   }
                 });
@@ -113,17 +115,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   if (!isGameOver) {
-                    if (!Questions.getQuestion(questionNumber).answer) {
-                      scoreKeeper.add(
-                        Icon(Icons.check, color: Colors.green),
-                      );
-                      correctAnswers++;
-                    } else {
-                      scoreKeeper.add(
-                        Icon(Icons.close, color: Colors.red),
-                      );
-                      incorrectAnswers++;
-                    }
+                    checkAnswer(false);
                     questionNumber++;
                   }
                 });
