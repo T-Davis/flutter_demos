@@ -1,4 +1,7 @@
+import 'package:destini_challenge_starting/storyData.dart';
 import 'package:flutter/material.dart';
+
+import 'story.dart';
 
 void main() => runApp(Destini());
 
@@ -18,6 +21,8 @@ class StoryPage extends StatefulWidget {
 class _StoryPageState extends State<StoryPage> {
   @override
   Widget build(BuildContext context) {
+    int storyNumber = 0;
+    Story story = StoryData.getStory(storyNumber);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -33,7 +38,7 @@ class _StoryPageState extends State<StoryPage> {
                 flex: 12,
                 child: Center(
                   child: Text(
-                    'Story text will go here.',
+                    story.storyTitle,
                     style: TextStyle(
                       fontSize: 25.0,
                     ),
@@ -48,7 +53,7 @@ class _StoryPageState extends State<StoryPage> {
                   },
                   color: Colors.red,
                   child: Text(
-                    'Choice 1',
+                    story.choice1,
                     style: TextStyle(
                       fontSize: 20.0,
                     ),
@@ -66,7 +71,7 @@ class _StoryPageState extends State<StoryPage> {
                   },
                   color: Colors.blue,
                   child: Text(
-                    'Choice 2',
+                    story.choice2,
                     style: TextStyle(
                       fontSize: 20.0,
                     ),
