@@ -19,10 +19,10 @@ class StoryPage extends StatefulWidget {
 }
 
 class _StoryPageState extends State<StoryPage> {
+  int storyNumber = 0;
+  Story story = StoryData.getStory(0);
   @override
   Widget build(BuildContext context) {
-    int storyNumber = 0;
-    Story story = StoryData.getStory(storyNumber);
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -50,6 +50,29 @@ class _StoryPageState extends State<StoryPage> {
                 child: FlatButton(
                   onPressed: () {
                     //Choice 1 made by user.
+                    setState(() {
+                      switch (storyNumber) {
+                        case 0:
+                          storyNumber = 2;
+                          break;
+                        case 1:
+                          storyNumber = 2;
+                          break;
+                        case 2:
+                          storyNumber = 5;
+                          break;
+                        case 3:
+                          storyNumber = 0;
+                          break;
+                        case 4:
+                          storyNumber = 0;
+                          break;
+                        case 5:
+                          storyNumber = 0;
+                          break;
+                      }
+                      story = StoryData.getStory(storyNumber);
+                    });
                   },
                   color: Colors.red,
                   child: Text(
@@ -68,6 +91,29 @@ class _StoryPageState extends State<StoryPage> {
                 child: FlatButton(
                   onPressed: () {
                     //Choice 2 made by user.
+                    setState(() {
+                      switch (storyNumber) {
+                        case 0:
+                          storyNumber = 1;
+                          break;
+                        case 1:
+                          storyNumber = 3;
+                          break;
+                        case 2:
+                          storyNumber = 4;
+                          break;
+                        case 3:
+                          storyNumber = 0;
+                          break;
+                        case 4:
+                          storyNumber = 0;
+                          break;
+                        case 5:
+                          storyNumber = 0;
+                          break;
+                      }
+                      story = StoryData.getStory(storyNumber);
+                    });
                   },
                   color: Colors.blue,
                   child: Text(
