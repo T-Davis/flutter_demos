@@ -45,6 +45,16 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
+          Container(
+            child: FlatButton(
+              color: bottomContainerColor,
+              onPressed: () {
+                print('pressed');
+              },
+            ),
+            width: double.infinity,
+            height: bottomContainerHeight,
+          ),
         ],
       ),
     );
