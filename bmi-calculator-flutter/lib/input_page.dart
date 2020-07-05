@@ -1,11 +1,13 @@
+import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'icon_content.dart';
 
 const double bottomContainerHeight = 80;
 const selectableCardColor = Color(0xFF1E2032);
 const notSelectableCardColor = Color(0xFF101527);
 const bottomContainerColor = Color(0xFFEA1556);
-const unselectedIconColor = Color(0xFF8E8E99);
 
 class InputPage extends StatefulWidget {
   @override
@@ -25,36 +27,42 @@ class _InputPageState extends State<InputPage> {
               child: Row(
             children: <Widget>[
               Expanded(
-                child: Card(
+                child: ReusableCard(
                   color: selectableCardColor,
                   child: IconContent(
                     icon: FontAwesomeIcons.mars,
-                    text: 'MALE',
+                    label: 'MALE',
                   ),
                 ),
               ),
               Expanded(
-                child: Card(
+                child: ReusableCard(
                   color: selectableCardColor,
                   child: IconContent(
                     icon: FontAwesomeIcons.venus,
-                    text: 'FEMALE',
+                    label: 'FEMALE',
                   ),
                 ),
               )
             ],
           )),
           Expanded(
-            child: Card(color: notSelectableCardColor),
+            child: ReusableCard(
+              color: notSelectableCardColor,
+            ),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Card(color: notSelectableCardColor),
+                  child: ReusableCard(
+                    color: notSelectableCardColor,
+                  ),
                 ),
                 Expanded(
-                  child: Card(color: notSelectableCardColor),
+                  child: ReusableCard(
+                    color: notSelectableCardColor,
+                  ),
                 )
               ],
             ),
@@ -70,56 +78,6 @@ class _InputPageState extends State<InputPage> {
             height: bottomContainerHeight,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class IconContent extends StatelessWidget {
-  final IconData icon;
-  final String text;
-
-  const IconContent({this.icon, this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Icon(
-          icon,
-          size: 80,
-          color: unselectedIconColor,
-        ),
-        SizedBox(
-          height: 15,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 18,
-            color: unselectedIconColor,
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class Card extends StatelessWidget {
-  final Color color;
-  final Widget child;
-
-  const Card({@required this.color, this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: child,
-      margin: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: this.color,
-        borderRadius: BorderRadius.circular(10),
       ),
     );
   }
