@@ -4,10 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'icon_content.dart';
 
-const double bottomContainerHeight = 80;
 const selectableCardColor = Color(0xFF1E2032);
 const notSelectableCardColor = Color(0xFF101527);
+const unselectedIconColor = Color(0xFF8E8E99);
+const selectedIconColor = Color(0xFFFFFFFF);
 const bottomContainerColor = Color(0xFFEA1556);
+const double bottomContainerHeight = 80;
 
 class InputPage extends StatefulWidget {
   @override
@@ -15,6 +17,11 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleIconColor = unselectedIconColor;
+  Color femaleIconColor = unselectedIconColor;
+  bool maleCardActive = false;
+  bool femaleCardActive = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +34,52 @@ class _InputPageState extends State<InputPage> {
               child: Row(
             children: <Widget>[
               Expanded(
-                child: ReusableCard(
-                  color: selectableCardColor,
-                  child: IconContent(
-                    icon: FontAwesomeIcons.mars,
-                    label: 'MALE',
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (!maleCardActive) {
+                        maleCardActive = true;
+                        femaleCardActive = false;
+                        maleIconColor = selectedIconColor;
+                        femaleIconColor = unselectedIconColor;
+                      } else {
+                        maleCardActive = false;
+                        maleIconColor = unselectedIconColor;
+                      }
+                    });
+                  },
+                  child: ReusableCard(
+                    color: selectableCardColor,
+                    child: IconContent(
+                      icon: FontAwesomeIcons.mars,
+                      label: 'MALE',
+                      color: maleIconColor,
+                    ),
                   ),
                 ),
               ),
               Expanded(
-                child: ReusableCard(
-                  color: selectableCardColor,
-                  child: IconContent(
-                    icon: FontAwesomeIcons.venus,
-                    label: 'FEMALE',
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (!femaleCardActive) {
+                        femaleCardActive = true;
+                        maleCardActive = false;
+                        femaleIconColor = selectedIconColor;
+                        maleIconColor = unselectedIconColor;
+                      } else {
+                        femaleCardActive = false;
+                        femaleIconColor = unselectedIconColor;
+                      }
+                    });
+                  },
+                  child: ReusableCard(
+                    color: selectableCardColor,
+                    child: IconContent(
+                      icon: FontAwesomeIcons.venus,
+                      label: 'FEMALE',
+                      color: femaleIconColor,
+                    ),
                   ),
                 ),
               )

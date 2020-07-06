@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-const unselectedIconColor = Color(0xFF8E8E99);
-
 class IconContent extends StatelessWidget {
   final IconData icon;
   final String label;
+  final Color color;
 
-  const IconContent({this.icon, this.label});
+  const IconContent({this.icon, this.label, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class IconContent extends StatelessWidget {
         Icon(
           icon,
           size: 80,
-          color: unselectedIconColor,
+          color: color,
         ),
         SizedBox(
           height: 15,
@@ -25,7 +24,7 @@ class IconContent extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 18,
-            color: unselectedIconColor,
+            color: color,
           ),
         )
       ],
