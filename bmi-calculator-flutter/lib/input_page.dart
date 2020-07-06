@@ -33,40 +33,36 @@ class _InputPageState extends State<InputPage> {
               child: Row(
             children: <Widget>[
               Expanded(
-                child: GestureDetector(
+                child: ReusableCard(
+                  color: selectableCardColor,
                   onTap: () {
                     setState(() {
                       selectedGender = Gender.male;
                     });
                   },
-                  child: ReusableCard(
-                    color: selectableCardColor,
-                    child: IconContent(
-                      icon: FontAwesomeIcons.mars,
-                      label: 'MALE',
-                      color: selectedGender == Gender.male
-                          ? selectedIconColor
-                          : unselectedIconColor,
-                    ),
+                  child: IconContent(
+                    icon: FontAwesomeIcons.mars,
+                    label: 'MALE',
+                    color: selectedGender == Gender.male
+                        ? selectedIconColor
+                        : unselectedIconColor,
                   ),
                 ),
               ),
               Expanded(
-                child: GestureDetector(
+                child: ReusableCard(
+                  color: selectableCardColor,
                   onTap: () {
                     setState(() {
                       selectedGender = Gender.female;
                     });
                   },
-                  child: ReusableCard(
-                    color: selectableCardColor,
-                    child: IconContent(
-                      icon: FontAwesomeIcons.venus,
-                      label: 'FEMALE',
-                      color: selectedGender == Gender.female
-                          ? selectedIconColor
-                          : unselectedIconColor,
-                    ),
+                  child: IconContent(
+                    icon: FontAwesomeIcons.venus,
+                    label: 'FEMALE',
+                    color: selectedGender == Gender.female
+                        ? selectedIconColor
+                        : unselectedIconColor,
                   ),
                 ),
               )
