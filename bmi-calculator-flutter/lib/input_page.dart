@@ -2,16 +2,8 @@ import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'constants.dart';
 import 'icon_content.dart';
-
-const selectableCardColor = Color(0xFF1E2032);
-const notSelectableCardColor = Color(0xFF101527);
-const unselectedIconColor = Color(0xFF8E8E99);
-const selectedIconColor = Color(0xFFFFFFFF);
-const bottomContainerColor = Color(0xFFEA1556);
-const double bottomContainerHeight = 80;
-
-enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
