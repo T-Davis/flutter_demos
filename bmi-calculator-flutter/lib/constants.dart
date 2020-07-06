@@ -36,3 +36,22 @@ class LabelText extends StatelessWidget {
     );
   }
 }
+
+class RoundIconButton extends StatelessWidget {
+  final IconData icon;
+  final Function onPressed;
+
+  RoundIconButton({@required this.icon, @required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      shape: CircleBorder(),
+      constraints: BoxConstraints.tightFor(width: 56, height: 56),
+      fillColor: Color(0xFF1C2032),
+      elevation: 2.0,
+      onPressed: onPressed,
+      child: Icon(icon),
+    );
+  }
+}
