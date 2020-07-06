@@ -20,6 +20,7 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
               child: Row(
@@ -34,7 +35,7 @@ class _InputPageState extends State<InputPage> {
                   },
                   child: IconContent(
                     icon: FontAwesomeIcons.mars,
-                    label: 'MALE',
+                    text: 'MALE',
                     color: selectedGender == Gender.male
                         ? selectedIconColor
                         : unselectedIconColor,
@@ -51,7 +52,7 @@ class _InputPageState extends State<InputPage> {
                   },
                   child: IconContent(
                     icon: FontAwesomeIcons.venus,
-                    label: 'FEMALE',
+                    text: 'FEMALE',
                     color: selectedGender == Gender.female
                         ? selectedIconColor
                         : unselectedIconColor,
@@ -63,6 +64,28 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: ReusableCard(
               color: notSelectableCardColor,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  LabelText(
+                    text: 'HEIGHT',
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        '180',
+                        style: numberTextStyle,
+                      ),
+                      LabelText(
+                        text: 'cm',
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(

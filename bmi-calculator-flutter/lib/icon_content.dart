@@ -1,11 +1,12 @@
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 
 class IconContent extends StatelessWidget {
   final IconData icon;
-  final String label;
+  final String text;
   final Color color;
 
-  const IconContent({this.icon, this.label, this.color});
+  const IconContent({this.icon, this.text, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +21,32 @@ class IconContent extends StatelessWidget {
         SizedBox(
           height: 15,
         ),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 18,
-            color: color,
-          ),
-        )
+        LabelText(
+          text: text,
+          color: color,
+        ),
       ],
     );
   }
 }
+
+//class LabelText extends StatelessWidget {
+//  const LabelText({
+//    @required this.label,
+//    this.color,
+//  });
+//
+//  final String label;
+//  final Color color;
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Text(
+//      label,
+//      style: TextStyle(
+//        fontSize: 18,
+//        color: color,
+//      ),
+//    );
+//  }
+//}
