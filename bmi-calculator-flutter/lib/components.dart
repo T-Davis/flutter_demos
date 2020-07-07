@@ -119,3 +119,27 @@ class ReusableCard extends StatelessWidget {
     );
   }
 }
+
+class Bmi {
+  static double calculate(int height, int weight) {
+    return weight / (height / 100 * 2);
+  }
+
+  static String result(double bmi) {
+    if (bmi > 25) {
+      return 'overweight';
+    } else if (bmi > 18.5) {
+      return 'normal weight';
+    }
+    return 'underweight';
+  }
+
+  static String interpret(double bmi) {
+    if (bmi > 25) {
+      return 'You have a higher than normal body weight.\nCheck with your doctor for advice.';
+    } else if (bmi > 18.5) {
+      return 'You have a normal body weight.\nGood for you!';
+    }
+    return 'You have a lower than normal body weight.\nCheck with your doctor for advice';
+  }
+}

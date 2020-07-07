@@ -11,10 +11,10 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender selectedGender;
-  int height = 170;
-  int weight = 150;
-  int age = 30;
+  Gender _selectedGender;
+  int _height = 170;
+  int _weight = 75;
+  int _age = 30;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +33,13 @@ class _InputPageState extends State<InputPage> {
                   color: selectableCardColor,
                   onTap: () {
                     setState(() {
-                      selectedGender = Gender.male;
+                      _selectedGender = Gender.male;
                     });
                   },
                   child: IconContent(
                     icon: FontAwesomeIcons.mars,
                     text: 'MALE',
-                    color: selectedGender == Gender.male
+                    color: _selectedGender == Gender.male
                         ? selectedIconColor
                         : unselectedIconColor,
                   ),
@@ -50,13 +50,13 @@ class _InputPageState extends State<InputPage> {
                   color: selectableCardColor,
                   onTap: () {
                     setState(() {
-                      selectedGender = Gender.female;
+                      _selectedGender = Gender.female;
                     });
                   },
                   child: IconContent(
                     icon: FontAwesomeIcons.venus,
                     text: 'FEMALE',
-                    color: selectedGender == Gender.female
+                    color: _selectedGender == Gender.female
                         ? selectedIconColor
                         : unselectedIconColor,
                   ),
@@ -79,7 +79,7 @@ class _InputPageState extends State<InputPage> {
                     textBaseline: TextBaseline.alphabetic,
                     children: <Widget>[
                       Text(
-                        height.toString(),
+                        _height.toString(),
                         style: numberTextStyle,
                       ),
                       LabelText(
@@ -98,12 +98,12 @@ class _InputPageState extends State<InputPage> {
                         overlayShape:
                             RoundSliderOverlayShape(overlayRadius: 30.0)),
                     child: Slider(
-                      value: height.toDouble(),
+                      value: _height.toDouble(),
                       min: 140,
                       max: 200,
                       onChanged: (value) {
                         setState(() {
-                          height = value.round();
+                          _height = value.round();
                         });
                       },
                     ),
@@ -125,7 +125,7 @@ class _InputPageState extends State<InputPage> {
                           text: 'WEIGHT',
                         ),
                         Text(
-                          weight.toString(),
+                          _weight.toString(),
                           style: numberTextStyle,
                         ),
                         Row(
@@ -135,7 +135,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
                                 setState(() {
-                                  weight--;
+                                  _weight--;
                                 });
                               },
                             ),
@@ -146,7 +146,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
                                 setState(() {
-                                  weight++;
+                                  _weight++;
                                 });
                               },
                             )
@@ -166,7 +166,7 @@ class _InputPageState extends State<InputPage> {
                           text: 'AGE',
                         ),
                         Text(
-                          age.toString(),
+                          _age.toString(),
                           style: numberTextStyle,
                         ),
                         Row(
@@ -176,7 +176,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
                                 setState(() {
-                                  age--;
+                                  _age--;
                                 });
                               },
                             ),
@@ -187,7 +187,7 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
                                 setState(() {
-                                  age++;
+                                  _age++;
                                 });
                               },
                             )
@@ -207,7 +207,7 @@ class _InputPageState extends State<InputPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return ResultsPage();
+                    return ResultsPage(Bmi.calculate(_height, _weight));
                   },
                 ),
               );
