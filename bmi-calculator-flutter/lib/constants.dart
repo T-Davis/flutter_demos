@@ -2,6 +2,8 @@ library constants;
 
 import 'package:flutter/material.dart';
 
+enum Gender { male, female }
+
 const selectableCardColor = Color(0xFF1E2032);
 const notSelectableCardColor = Color(0xFF101527);
 const unselectedIconColor = Color(0xFF8E8E99);
@@ -13,45 +15,23 @@ const TextStyle numberTextStyle = TextStyle(
   fontWeight: FontWeight.w900,
   fontSize: 50.0,
 );
-
-enum Gender { male, female }
-
-class LabelText extends StatelessWidget {
-  LabelText({
-    @required this.text,
-    this.color: labelColor,
-  });
-
-  final String text;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 18,
-        color: color,
-      ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  final IconData icon;
-  final Function onPressed;
-
-  RoundIconButton({@required this.icon, @required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      shape: CircleBorder(),
-      constraints: BoxConstraints.tightFor(width: 56, height: 56),
-      fillColor: Color(0xFF1C2032),
-      elevation: 2.0,
-      onPressed: onPressed,
-      child: Icon(icon),
-    );
-  }
-}
+const TextStyle largeButtonTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 25,
+);
+const TextStyle titleTestStyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.bold,
+);
+const TextStyle resultTextStyle = TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+);
+const TextStyle bmiTextStyle = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+);
+const TextStyle bodyTextStyle = TextStyle(
+  fontSize: 22.0,
+);
