@@ -3,6 +3,7 @@ import 'package:clima/services/location.dart';
 import 'package:clima/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:geolocator/geolocator.dart';
 
 const String apiKey = 'b390e706a11e93ff2d47b71244536ea5';
 
@@ -12,25 +13,16 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  double latitude;
-  double longitude;
-
   @override
   void initState() {
     super.initState();
-    getLocationData();
+    getWeatherData();
   }
 
-  void getLocationData() async {
-    Location location = Location();
-    await location.getCurrentLocation();
-    longitude = location.longitude;
-    latitude = location.latitude;
-
-    NetworkHelper networkHelper = NetworkHelper(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=imperial');
-    var weatherData = await networkHelper.getData();
-
+  void getWeatherData() async {
+    Position position = await Location.getCurrentLocation();
+    var weatherData = await Networking.getWeatherData(
+        'https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=$apiKey&units=imperial');
     Navigator.push(
         context,
         MaterialPageRoute(
