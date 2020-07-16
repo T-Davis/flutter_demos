@@ -21,7 +21,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         context,
         MaterialPageRoute(
             builder: (context) => LocationScreen(
-                  locationWeather: weatherData,
+                  weatherData: weatherData,
                 )));
   }
 

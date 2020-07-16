@@ -3,9 +3,9 @@ import 'package:clima/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class LocationScreen extends StatefulWidget {
-  final locationWeather;
+  final weatherData;
 
-  const LocationScreen({this.locationWeather});
+  const LocationScreen({this.weatherData});
 
   @override
   _LocationScreenState createState() => _LocationScreenState();
@@ -20,14 +20,21 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   void initState() {
     super.initState();
-    updateUI(widget.locationWeather);
+    updateUI(widget.weatherData);
   }
 
-  void updateUI(locationWeather) {
+  void updateUI(var weatherData) {
     setState(() {
-      temperature = locationWeather['main']['temp'].toInt();
-      cityName = locationWeather['name'];
-      int condition = locationWeather['weather'][0]['id'];
+      if (weatherData == null) {
+        temperature = 0;
+        cityName = 'Unknown';
+        weatherIcon = '🤷';
+        weatherMessage = 'Unable to get the weather';
+        return;
+      }
+      temperature = weatherData['main']['temp'].toInt();
+      cityName = weatherData['name'];
+      int condition = weatherData['weather'][0]['id'];
       weatherIcon = Weather.getWeatherIcon(condition);
       weatherMessage = Weather.getMessage(temperature);
     });
