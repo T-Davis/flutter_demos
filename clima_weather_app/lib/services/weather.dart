@@ -10,14 +10,16 @@ class Weather {
     Position position;
     position = await Location.getCurrentLocation()
         .timeout(const Duration(seconds: 5), onTimeout: () {
-      print(
-          'onTimeout() executed for getLocationWeather(), location data not available for device');
       return Position(longitude: 77.1069857, latitude: 28.6695721);
     });
-    print(position.longitude);
     var weatherData = await Networking.getWeatherData(
         '$openWeatherMapURL?lat=${position.latitude}&lon=${position.longitude}&appid=$apiKey&units=imperial');
-    print(weatherData);
+    return weatherData;
+  }
+
+  static Future<dynamic> getCityWeather(String cityName) async {
+    var weatherData = await Networking.getWeatherData(
+        '$openWeatherMapURL?q=$cityName&appid=$apiKey&units=imperial');
     return weatherData;
   }
 
