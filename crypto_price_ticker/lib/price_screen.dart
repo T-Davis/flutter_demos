@@ -1,3 +1,4 @@
+import 'package:cryptopriceticker/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatefulWidget {
@@ -6,6 +7,8 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  String selectedCurrency = 'USD';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,14 +46,18 @@ class _PriceScreenState extends State<PriceScreen> {
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
             child: DropdownButton<String>(
-              value: 'USD',
-              items: <String>['USD', 'EUR'].map((String value) {
+              value: selectedCurrency,
+              items: currencies.map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
                 );
               }).toList(),
-              onChanged: (_) {},
+              onChanged: (value) {
+                setState(() {
+                  selectedCurrency = value;
+                });
+              },
             ),
           ),
         ],
