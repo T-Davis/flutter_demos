@@ -18,7 +18,8 @@ class _PriceScreenState extends State<PriceScreen> {
       return CupertinoPicker(
         backgroundColor: Colors.lightBlue,
         itemExtent: 32,
-        onSelectedItemChanged: (index) => selectedCurrency = currencies[index],
+        onSelectedItemChanged: (index) =>
+            setState(() => selectedCurrency = currencies[index]),
         children: currencies.map((value) => Text(value)).toList(),
       );
     } else {
@@ -35,11 +36,7 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
             )
             .toList(),
-        onChanged: (value) {
-          setState(() {
-            selectedCurrency = value;
-          });
-        },
+        onChanged: (value) => setState(() => selectedCurrency = value),
       );
     }
   }
