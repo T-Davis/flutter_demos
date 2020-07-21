@@ -6,20 +6,48 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatefulWidget {
+  final cryptoPrices;
+
+  PriceScreen({this.cryptoPrices});
+
   @override
   _PriceScreenState createState() => _PriceScreenState();
 }
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
+  double btc;
+  double eth;
+  double ltc;
+
+  @override
+  void initState() {
+    super.initState();
+    updateCryptoPrices(widget.cryptoPrices);
+  }
+
+  updateCryptoPrices(var cryptoPrices) {
+    setState(() {
+      if (cryptoPrices == null) {
+        btc = 0;
+        eth = 0;
+        ltc = 0;
+        return;
+      }
+      btc = (cryptoPrices['BTC'] * 100).round() / 100;
+      eth = (cryptoPrices['ETH'] * 100).round() / 100;
+      ltc = (cryptoPrices['LTC'] * 100).round() / 100;
+    });
+  }
 
   Widget currencyPicker() {
     if (Platform.isIOS) {
       return CupertinoPicker(
         backgroundColor: Colors.lightBlue,
         itemExtent: 32,
-        onSelectedItemChanged: (index) =>
-            setState(() => selectedCurrency = currencies[index]),
+        onSelectedItemChanged: (index) async {
+          updateCryptoPrices(await Network.getPrices(currencies[index]));
+        },
         children: currencies.map((value) => Text(value)).toList(),
       );
     } else {
@@ -36,19 +64,19 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
             )
             .toList(),
-        onChanged: (value) => setState(() => selectedCurrency = value),
+        onChanged: (value) async {
+          updateCryptoPrices(await Network.getPrices(value));
+        },
       );
     }
   }
 
-  void getPrices() async {
-    print(await Network.getPrices(selectedCurrency));
+  Future<Map<String, double>> getPrices(String currency) async {
+    return await Network.getPrices(currency);
   }
 
   @override
   Widget build(BuildContext context) {
-    getPrices();
-
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Crypto Ticker'),
@@ -72,7 +100,7 @@ class _PriceScreenState extends State<PriceScreen> {
                     padding:
                         EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                     child: Text(
-                      '1 BTC = ? $selectedCurrency',
+                      '1 BTC = $btc $selectedCurrency',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20.0,
@@ -94,7 +122,7 @@ class _PriceScreenState extends State<PriceScreen> {
                     padding:
                         EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                     child: Text(
-                      '1 ETH = ? $selectedCurrency',
+                      '1 ETH = $eth $selectedCurrency',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20.0,
@@ -116,7 +144,7 @@ class _PriceScreenState extends State<PriceScreen> {
                     padding:
                         EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                     child: Text(
-                      '1 LTC = ? $selectedCurrency',
+                      '1 LTC = $ltc $selectedCurrency',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20.0,
