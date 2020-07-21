@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 
+import 'package:cryptopriceticker/network.dart';
 import 'package:cryptopriceticker/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,14 @@ class _PriceScreenState extends State<PriceScreen> {
     }
   }
 
+  void getPrices() async {
+    print(await Network.getPrices(selectedCurrency));
+  }
+
   @override
   Widget build(BuildContext context) {
+    getPrices();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('🤑 Crypto Ticker'),
