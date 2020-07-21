@@ -1,7 +1,6 @@
+import 'package:cryptopriceticker/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-import 'price_screen.dart';
 
 Future main() async {
   await DotEnv().load('.env');
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
           primaryColor: Colors.lightBlue,
           scaffoldBackgroundColor: Colors.white),
-      home: PriceScreen(),
+      home: LoadingScreen(),
     );
   }
 }
