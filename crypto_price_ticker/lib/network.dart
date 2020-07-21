@@ -1,14 +1,14 @@
+import 'dart:collection';
 import 'dart:convert';
 
-import 'package:cryptopriceticker/models/crypto.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class Network {
   static const url = "https://rest.coinapi.io/v1/exchangerate/";
 
-  static Future<List<Crypto>> getPrices(String currency) async {
-    List<Crypto> cryptos = [];
+  static Future<Map<String, double>> getPrices(String currency) async {
+    Map cryptos = HashMap<String, double>();
 
     var header = {'X-CoinAPI-Key': '${DotEnv().env['API_KEY']}'};
 
@@ -16,27 +16,30 @@ class Network {
         await http.get(url + 'BTC/' + currency, headers: header);
     if (btc.statusCode == 200) {
       var res = jsonDecode(btc.body);
-      cryptos.add(Crypto(name: 'BTC', price: res['rate']));
+      cryptos['BTC'] = res['rate'];
     } else {
-      cryptos.add(Crypto(name: 'BTC', price: 0.00));
+      cryptos['BTC'] = 0.00;
+      print(btc.statusCode);
     }
 
     http.Response eth =
         await http.get(url + 'ETH/' + currency, headers: header);
     if (eth.statusCode == 200) {
-      var res = jsonDecode(btc.body);
-      cryptos.add(Crypto(name: 'ETH', price: res['rate']));
+      var res = jsonDecode(eth.body);
+      cryptos['ETH'] = res['rate'];
     } else {
-      cryptos.add(Crypto(name: 'ETH', price: 0.00));
+      cryptos['ETH'] = 0.00;
+      print(eth.statusCode);
     }
 
     http.Response ltc =
         await http.get(url + 'LTC/' + currency, headers: header);
     if (ltc.statusCode == 200) {
-      var res = jsonDecode(btc.body);
-      cryptos.add(Crypto(name: 'LTC', price: res['rate']));
+      var res = jsonDecode(ltc.body);
+      cryptos['LTC'] = res['rate'];
     } else {
-      cryptos.add(Crypto(name: 'LTC', price: 0.00));
+      cryptos['LTC'] = 0.00;
+      print(ltc.statusCode);
     }
 
     return cryptos;
