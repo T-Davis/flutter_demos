@@ -1,3 +1,4 @@
+import 'package:flashchat/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(FlashChat());
@@ -11,6 +12,10 @@ class FlashChat extends StatelessWidget {
           bodyText2: TextStyle(color: Colors.black54),
         ),
       ),
+      initialRoute: 'welcome_screen',
+      routes: {
+        'welcome_screen': (context) => WelcomeScreen(),
+      },
     );
   }
 }
