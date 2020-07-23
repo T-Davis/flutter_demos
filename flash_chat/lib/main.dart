@@ -12,9 +12,9 @@ class FlashChat extends StatelessWidget {
           bodyText2: TextStyle(color: Colors.black54),
         ),
       ),
-      initialRoute: 'welcome_screen',
+      initialRoute: WelcomeScreen.routeName,
       routes: {
-        'welcome_screen': (context) => WelcomeScreen(),
+        WelcomeScreen.routeName: (context) => WelcomeScreen(),
       },
     );
   }
