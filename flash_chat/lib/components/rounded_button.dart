@@ -8,7 +8,7 @@ class RoundedButton extends StatelessWidget {
   const RoundedButton({
     this.color,
     this.title,
-    this.onPressed,
+    @required this.onPressed,
   });
 
   @override
