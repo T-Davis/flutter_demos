@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flashchat/constants.dart';
 import 'package:flutter/material.dart';
 
+final _firestore = Firestore.instance;
+FirebaseUser loggedInUser;
+
 class ChatScreen extends StatefulWidget {
   static const routeName = '/chatScreen';
 
@@ -13,8 +16,6 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
-  final _firestore = Firestore.instance;
-  FirebaseUser loggedInUser;
   String messageText;
 
   @override
@@ -55,7 +56,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessageStream(firestore: _firestore),
+            MessageStream(),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -92,14 +93,6 @@ class _ChatScreenState extends State<ChatScreen> {
 }
 
 class MessageStream extends StatelessWidget {
-  const MessageStream({
-    Key key,
-    @required Firestore firestore,
-  })  : _firestore = firestore,
-        super(key: key);
-
-  final Firestore _firestore;
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -112,19 +105,23 @@ class MessageStream extends StatelessWidget {
             ),
           );
         }
-        final messages = snapshot.data.documents;
+        final messages = snapshot.data.documents.reversed;
         List<MessageBubble> messageBubbles = [];
         for (var message in messages) {
           final messageText = message.data['text'];
           final messageSender = message.data['sender'];
-          var messageBubble =
-              MessageBubble(text: messageText, sender: messageSender);
+          var messageBubble = MessageBubble(
+            text: messageText,
+            sender: messageSender,
+            isLoggedInUser: messageSender == loggedInUser.email,
+          );
           messageBubbles.add(
             messageBubble,
           );
         }
         return Expanded(
           child: ListView(
+            reverse: true,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             children: messageBubbles,
           ),
@@ -137,15 +134,17 @@ class MessageStream extends StatelessWidget {
 class MessageBubble extends StatelessWidget {
   final sender;
   final text;
+  final bool isLoggedInUser;
 
-  MessageBubble({this.sender, this.text});
+  MessageBubble({this.sender, this.text, this.isLoggedInUser});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment:
+            isLoggedInUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             sender,
@@ -155,15 +154,22 @@ class MessageBubble extends StatelessWidget {
             ),
           ),
           Material(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.only(
+              topLeft:
+                  isLoggedInUser ? Radius.circular(30) : Radius.circular(0),
+              topRight:
+                  isLoggedInUser ? Radius.circular(0) : Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            ),
             elevation: 5,
-            color: Colors.lightBlueAccent,
+            color: isLoggedInUser ? Colors.lightBlueAccent : Colors.white,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Text(
                 text,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: isLoggedInUser ? Colors.white : Colors.black54,
                   fontSize: 15,
                 ),
               ),
