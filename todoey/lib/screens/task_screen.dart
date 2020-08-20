@@ -51,15 +51,48 @@ class TaskScreen extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  )),
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                children: [
+                  TaskWidget(
+                    text: 'Buy milk',
+                  ),
+                  TaskWidget(
+                    text: 'Buy cereal',
+                  ),
+                  TaskWidget(
+                    text: 'Eat breakfast',
+                  ),
+                ],
+              ),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class TaskWidget extends StatelessWidget {
+  final text;
+
+  const TaskWidget({this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      title: Text(text),
+      controlAffinity: ListTileControlAffinity.trailing,
+      onChanged: (bool) {
+        print('bool');
+      },
+      value: false,
     );
   }
 }
