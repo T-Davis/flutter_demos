@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:todoey/widgets/task_tile.dart';
 
-class TasksList extends StatelessWidget {
+class TaskList extends StatefulWidget {
+  @override
+  _TasksListState createState() => _TasksListState();
+}
+
+class _TasksListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        TaskTile(
-          text: 'get milk',
-        ),
-        TaskTile(
-          text: 'get milk',
-        ),
-        TaskTile(
-          text: 'get milk',
-        ),
+        TaskTile(),
+        TaskTile(),
+        TaskTile(),
       ],
     );
   }
