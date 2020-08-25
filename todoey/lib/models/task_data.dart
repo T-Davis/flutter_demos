@@ -19,7 +19,7 @@ class TaskData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void markAsDone(Task task) {
+  void toggleDone(Task task) {
     task.toggleDone();
     notifyListeners();
   }
